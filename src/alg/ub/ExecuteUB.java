@@ -22,7 +22,7 @@ public class ExecuteUB
 		// configure the user-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
 		Predictor predictor = new MeanPredictor();
 		Neighbourhood neighbourhood = new NearestNeighbourhood(53);
-		SimilarityMetric metric = new Cosine();
+		SimilarityMetric metric = new Pearson();
 		
 		// set the paths and filenames of the item file, train file and test file ...
 		String itemFile = "FRT dataset" + File.separator + "r.item";

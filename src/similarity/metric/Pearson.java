@@ -5,17 +5,17 @@
  * 06/02/2012
  */
 
-
 package similarity.metric;
 
 import java.util.Set;
 
 import profile.Profile;
 
-public class Pearson {
+public class Pearson implements SimilarityMetric
+{
 
 	/**
-	 * constructor - creates a new CosineMetric object
+	 * constructor - creates a new PearsonMetric object
 	 */
 	public Pearson()
 	{
@@ -28,19 +28,30 @@ public class Pearson {
 	 */
 	public double getSimilarity(final Profile p1, final Profile p2)
 	{
-        double dotProduct = 0;
-        
-        Set<Integer> common = p1.getCommonIds(p2);
+       
+		double top = 0;
+		
+		Set<Integer> common = p1.getCommonIds(p2);
 		for(Integer id: common)
 		{
-			double r1 = p1.getValue(id).doubleValue();
-			double r2 = p2.getValue(id).doubleValue();
-			dotProduct += r1 * r2;
+			double r1 = p1.getValue(id).doubleValue() - p1.getMeanValue();
+			double r2 = p2.getValue(id).doubleValue() - p2.getMeanValue();
+			top += r1 * r2;
 		}
-
-		double n1 = p1.getNorm();
-		double n2 = p2.getNorm();
-		return (n1 > 0 && n2 > 0) ? dotProduct / (n1 * n2) : 0;
+		
+		double base1 = 0;
+		double base2 = 0;
+	
+		for(Integer id: common)
+		{
+			double n1 = p1.getValue(id).doubleValue() - p1.getMeanValue();
+			double n2 = p2.getValue(id).doubleValue() - p2.getMeanValue();
+			
+			base1 += Math.pow(n1, 2);
+			base2 += Math.pow(n2, 2);
+		}
+	
+		return (base1 > 0 && base2 > 0) ? top / (Math.sqrt(base1) * Math.sqrt(base2)) : 0;
 	}
 	
 	
