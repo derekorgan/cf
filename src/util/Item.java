@@ -54,4 +54,8 @@ public class Item
 	{
 		this.name = name;
 	}
+	
+	// todo get genres to access
+	
+	
 }

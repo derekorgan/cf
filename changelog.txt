@@ -1,0 +1,67 @@
+Derek Organ - 11283394
+Collective Intelligence - Project 2
+
+Change Log
+
+v0.04 - Added in Resnick Predictor Algorithm
+----------------------------------------
+Created a new predictor class using Resnick's algorigthm. 
+By using a combination of Pearson's Simlarity and Resnick's predictor I found some improvement with the probe data.
+
+Pearson + Resnick
+RMSE: 1.0116696920563688
+coverage: 99.79753359101785%
+
+By using Cosine with Resnick I found it to have a better combinational effect
+
+Cosine + Resnick 
+RMSE: 1.0037745315841637
+coverage: 100.0%
+
+v0.03 - Tested Pearson Similarity correlation - Feb 7. 2012
+----------------------------------------
+
+I changed the similarity algorithm to use Pearsons instead of Cosine which show an improvement with a very small coverage loss. 
+
+
+RMSE: 1.100091240396238
+coverage: 99.79753359101785%
+
+
+v0.02 - Updated Fixed Neighbourhood size  - Feb 6, 2012
+---------------------------------------
+
+I tested changing the neighbourhood size to range between 1 and 100.  The following results were found
+
+
+N size		RSME 
+1 			1.4961451171826305
+5			1.1831599539083058 
+10 			1.134420381930053
+20 			1.110594693291348
+30			1.1073889468207587
+40 			1.1058960051034536
+50			1.1045085051581185  << best result
+60			1.1053132181268333
+70			1.1066042356564234
+80			1.1069454038242852
+90 			1.1071530413192758
+100 		1.107469530198342
+
+From the graph of information above we can see that a neighbourhood size of 50 gives the best results for our probe data with a fixed size. 
+
+With bit more refinement I found 53 to be the optimal fix size for this set.
+
+Result RSME: 1.1043132359396504 
+coverage: 100%
+
+v0.01 - Fixed Bugs - Feb 2nd, 2012
+---------------------------------------
+
+I found and fixed the two bugs. 
+
+* Cosine Algorihtm was in correct
+* Index in for loop for Mean Predictor referenced first item instead of incrementing.
+
+Result RSME: 1.134420381930053
+Coverage: 100%
