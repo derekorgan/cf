@@ -1,7 +1,24 @@
 Derek Organ - 11283394
 Collective Intelligence - Project 2
 
-Change Log
+CHANGE LOG
+
+WEEK 2/3
+-------------------------------------------------------------------------------------
+v0.06 - Item based filtering
+----------------------------------------
+WORK IN PROGRESS: Changed code to test item based filtering instead of User based ...
+
+
+
+
+v0.05 - Updated the Item Class to include other attributes such as year	
+----------------------------------------
+I've added year as an accessible attribute of item.
+
+TODO: Add genre tags 
+
+
 
 v0.04 - Added in Resnick Predictor Algorithm
 ----------------------------------------
@@ -12,12 +29,14 @@ Pearson + Resnick
 RMSE: 1.0116696920563688
 coverage: 99.79753359101785%
 
-By using Cosine with Resnick I found it to have a better combinational effect
+By using Cosine with Resnick I found it to have a better combinational effect on the probe data
 
 Cosine + Resnick 
 RMSE: 1.0037745315841637
 coverage: 100.0%
 
+WEEK 1
+-------------------------------------------------------------------------------------
 v0.03 - Tested Pearson Similarity correlation - Feb 7. 2012
 ----------------------------------------
 

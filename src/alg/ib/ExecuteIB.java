@@ -5,7 +5,7 @@
  * 20/01/2011
  */
 
-package alg.ub;
+package alg.ib;
 
 import java.io.File;
 
@@ -15,11 +15,11 @@ import similarity.metric.*;
 import util.evaluator.Evaluator;
 import util.reader.DatasetReader;
 
-public class ExecuteUB
+public class ExecuteIB
 {
 	public static void main(String[] args)
 	{
-		// configure the user-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
+		// configure the item-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
 		Predictor predictor = new Resnick();
 		Neighbourhood neighbourhood = new NearestNeighbourhood(53);
 		SimilarityMetric metric = new Cosine();
@@ -27,7 +27,7 @@ public class ExecuteUB
 		// set the paths and filenames of the item file, train file and test file ...
 		String itemFile = "FRT dataset" + File.separator + "r.item";
 		String trainFile = "FRT dataset" + File.separator + "r.train";
-		String testFile = "FRT dataset" + File.separator + "r.test";
+		String testFile = "FRT dataset" + File.separator + "r.probe";
 		
 		// set the path and filename of the output file ...
 		String outputFile = "results" + File.separator + "predictions.txt";
@@ -37,7 +37,7 @@ public class ExecuteUB
 		// - the RMSE (if actual ratings are available) and coverage are output to screen
 		// - the output file is created
 		DatasetReader reader = new DatasetReader(itemFile, trainFile, testFile);
-		UserBasedCF ubcf = new UserBasedCF(predictor, neighbourhood, metric, reader);
+		ItemBasedCF ubcf = new ItemBasedCF(predictor, neighbourhood, metric, reader);
 		Evaluator eval = new Evaluator(ubcf, reader.getTestData());
 		eval.writeResults(outputFile);
 		Double RMSE = eval.getRMSE();
