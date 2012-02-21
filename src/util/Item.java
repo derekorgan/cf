@@ -11,16 +11,18 @@ public class Item
 {
 	private Integer id; // the numeric ID of the item
 	private String name; // the name of the item
+	private Integer year; // the year the item was brought out.
 	
 	/**
 	 * constructor - creates a new Item object
 	 * @param id
 	 * @param name
 	 */
-	public Item(final Integer id, final String name)
+	public Item(final Integer id, final String name, final Integer year)
 	{
 		this.id = id;
 		this.name = name;
+		this.year = year;
 	}
 
 	/**
@@ -40,6 +42,14 @@ public class Item
 	}
 	
 	/**
+	 * @return the name of the item
+	 */
+	public Integer getYear() 
+	{
+		return year;
+	}
+	
+	/**
 	 * @param set the ID of the item
 	 */
 	public void setId(final Integer id)
@@ -55,7 +65,15 @@ public class Item
 		this.name = name;
 	}
 	
-	// todo get genres to access
+	/**
+	 * @param set the name of the item
+	 */
+	public void setYear(final Integer year)
+	{
+		this.year = year;
+	}
+	
+	// TODO: add genre
 	
 	
 }

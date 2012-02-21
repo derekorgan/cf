@@ -179,7 +179,7 @@ public class DatasetReader
 			while ((line = br.readLine()) != null) 
 			{
 				StringTokenizer st = new StringTokenizer(line, "|");
-				if(st.countTokens() < 2)
+				if(st.countTokens() < 3)
 				{
 					System.out.println("Error reading from file \"" + filename + "\"");
 					System.exit(1);
@@ -187,7 +187,10 @@ public class DatasetReader
 				
 				Integer id = Integer.valueOf(st.nextToken());
 				String name = st.nextToken();
-				Item item = new Item(id, name);
+				Integer year = Integer.valueOf(st.nextToken());
+				Item item = new Item(id, name, year);
+				
+				//TODO: ... add genre tags to the item object. 
 				itemMap.put(id, item);
 			}
 
