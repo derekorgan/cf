@@ -3,15 +3,21 @@ Collective Intelligence - Project 2
 
 CHANGE LOG
 
-WEEK 2/3
+WEEK 4
 -------------------------------------------------------------------------------------
 v0.06 - Item based filtering
 ----------------------------------------
-WORK IN PROGRESS: Changed code to test item based filtering instead of User based ...
+Changed code to test item based filtering instead of User based.
+
+Item base seems to return better results than User based on the probe data.
+
+Cosine + Resnick
+RMSE: 0.992956721533153
+coverage: 100.0%
 
 
-
-
+WEEK 2/3
+-------------------------------------------------------------------------------------
 v0.05 - Updated the Item Class to include other attributes such as year	
 ----------------------------------------
 I've added year as an accessible attribute of item.

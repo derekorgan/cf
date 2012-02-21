@@ -8,8 +8,8 @@
 package alg.ib;
 
 import alg.CFAlgorithm;
-import alg.ub.neighbourhood.Neighbourhood;
-import alg.ub.predictor.Predictor;
+import alg.ib.neighbourhood.Neighbourhood;
+import alg.ib.predictor.Predictor;
 import similarity.SimilarityMap;
 import similarity.metric.SimilarityMetric;
 import util.reader.DatasetReader;
@@ -37,12 +37,15 @@ public class ItemBasedCF implements CFAlgorithm
 	}
 	
 	/**
-	 * @returns the target user's predicted rating for the target item or null if a prediction cannot be computed
-	 * @param userId - the target user ID
+	 * @returns the target item's predicted rating for the target user or null if a prediction cannot be computed
 	 * @param itemId - the target item ID
+	 * @param userId - the target user ID
+
 	 */
 	public Double getPrediction(final Integer userId, final Integer itemId)
 	{	
-		return predictor.getPrediction(userId, itemId, reader.getUserProfiles(), reader.getItemProfiles(), neighbourhood, simMap);
+		
+		return predictor.getPrediction(itemId, userId, reader.getItemProfiles(), reader.getUserProfiles(), neighbourhood, simMap);
+
 	}
 }

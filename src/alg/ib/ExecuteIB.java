@@ -9,8 +9,8 @@ package alg.ib;
 
 import java.io.File;
 
-import alg.ub.neighbourhood.*;
-import alg.ub.predictor.*;
+import alg.ib.neighbourhood.*;
+import alg.ib.predictor.*;
 import similarity.metric.*;
 import util.evaluator.Evaluator;
 import util.reader.DatasetReader;
@@ -37,8 +37,14 @@ public class ExecuteIB
 		// - the RMSE (if actual ratings are available) and coverage are output to screen
 		// - the output file is created
 		DatasetReader reader = new DatasetReader(itemFile, trainFile, testFile);
-		ItemBasedCF ubcf = new ItemBasedCF(predictor, neighbourhood, metric, reader);
-		Evaluator eval = new Evaluator(ubcf, reader.getTestData());
+		
+		int size = reader.getItemProfiles().size();
+		int users = reader.getUserProfiles().size();
+		System.out.println("Items: " + size);
+		System.out.println("Users: " + users);
+		
+		ItemBasedCF ibcf = new ItemBasedCF(predictor, neighbourhood, metric, reader);
+		Evaluator eval = new Evaluator(ibcf, reader.getTestData());
 		eval.writeResults(outputFile);
 		Double RMSE = eval.getRMSE();
 		if(RMSE != null) System.out.println("RMSE: " + RMSE);

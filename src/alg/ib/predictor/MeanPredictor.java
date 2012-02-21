@@ -10,7 +10,7 @@ package alg.ib.predictor;
 import java.util.ArrayList;
 import java.util.Map;
 
-import alg.ub.neighbourhood.Neighbourhood;
+import alg.ib.neighbourhood.Neighbourhood;
 import similarity.SimilarityMap;
 import profile.Profile;
 
@@ -32,15 +32,15 @@ public class MeanPredictor implements Predictor
 	 * @param neighbourhood - a Neighbourhood object
 	 * @param simMap - a map containing user-user similarities
 	 */
-	public Double getPrediction(final Integer userId, final Integer itemId, final Map<Integer,Profile> userProfileMap, final Map<Integer,Profile> itemProfileMap, final Neighbourhood neighbourhood, final SimilarityMap simMap)
+	public Double getPrediction(final Integer itemId, final Integer userId, final Map<Integer,Profile> itemProfileMap, final Map<Integer,Profile> userProfileMap, final Neighbourhood neighbourhood, final SimilarityMap simMap)
 	{
 		double above = 0;
 		
-		ArrayList<Integer> neighbours = neighbourhood.getNeighbours(userId, itemId, itemProfileMap, simMap); // get the neighbours
+		ArrayList<Integer> neighbours = neighbourhood.getNeighbours(itemId, userId, userProfileMap, simMap); // get the neighbours
 		
 		for(int i = 0; i < neighbours.size(); i++) // iterate over each neighbour
 		{
-			Double rating = userProfileMap.get(neighbours.get(i)).getValue(itemId); // get the neighbour's rating for the target item
+			Double rating = itemProfileMap.get(neighbours.get(i)).getValue(userId); // get the neighbour's rating for the target item
 			if(rating == null)
 			{
 				System.out.println("Error - rating is null!"); // this error should never occur since all neighbours by definition have rated the target item!
