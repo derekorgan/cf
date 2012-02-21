@@ -5,6 +5,29 @@ CHANGE LOG
 
 WEEK 4
 -------------------------------------------------------------------------------------
+
+
+v0.08
+----------------------------------------
+
+
+
+v0.07 - Updated K neighbours size for Item based filtering
+----------------------------------------
+
+The optimal neighbours for items is going to be different than for users.
+
+10 - 0.9967420413981437
+20 - 0.9893376268480041
+22 - 0.9890844621387769
+30 - 0.9906882336731407
+40 - 0.9916727257768321
+
+Some testing reveals 22 as the optimal number for the current setup on the probe data.
+
+RSME: 0.9890844621387769
+Coverage: 100.0%
+
 v0.06 - Item based filtering
 ----------------------------------------
 Changed code to test item based filtering instead of User based.
