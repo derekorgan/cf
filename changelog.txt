@@ -5,12 +5,56 @@ CHANGE LOG
 
 WEEK 4
 -------------------------------------------------------------------------------------
-
-
-v0.08
+v0.10 - Weighed item and user based predictions average 
 ----------------------------------------
 
 
+
+
+v0.09 - Hybrid Item and User Based 
+----------------------------------------
+I decided to average my user based and item based scores to get a better approximation.
+
+Code changes: 
+In the Evaluator.java file I get predictions for user and item based and average them. 
+
+RMSE: 0.9887045221561072
+coverage: 100.0%
+
+v0.08 - Testing Minimum neighbour size
+----------------------------------------
+
+I decided to experiment with a minimum neighbour size. In the current code it sets the minimum size to 0.  
+
+For the User Based filtering I found the following results.
+
+User Based Filtering
+Cosine + Resnick  Max K = 53
+k >         coverage         RSME
+0			100%			 1.0037
+4			99.96%		     1.0031
+7 		    99.74%			 1.0036
+10 			98.80%           1.0047
+15			95.17%			 1.0061
+20			89.09%			 1.0001
+25			82.96%			 0.9980
+30	        77.08%			 0.9989
+
+There does seem to be a minor improvement but the coverage gets too low after a while.  
+All users have a minimum of 4 neighbours as coverage is 100% up to this point. 
+
+Item Based Filtering
+Cosine + Resnick  Max K = 22
+k >         coverage         RSME
+0			100%			 0.9891		
+7			99.98%			 0.9891
+10			99.82%			 0.9892
+15			95.98%			 0.9870	
+20			84.76%			 0.9842		
+
+All items have a minimum of 7 neighbours as coverage is 100% up to this point.
+
+The main conclusion is setting a min size has a negligible effect on the RSME and I'm leaving it at 0.
 
 v0.07 - Updated K neighbours size for Item based filtering
 ----------------------------------------

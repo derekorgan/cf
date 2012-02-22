@@ -8,16 +8,16 @@
 package alg.ib;
 
 import alg.CFAlgorithm;
-import alg.ib.neighbourhood.Neighbourhood;
-import alg.ib.predictor.Predictor;
+import alg.ib.neighbourhood.NeighbourhoodItem;
+import alg.ib.predictor.PredictorItem;
 import similarity.SimilarityMap;
 import similarity.metric.SimilarityMetric;
 import util.reader.DatasetReader;
 
 public class ItemBasedCF implements CFAlgorithm
 {
-	private Predictor predictor; // the predictor technique  
-	private Neighbourhood neighbourhood; // the neighbourhood technique
+	private PredictorItem predictor; // the predictor technique  
+	private NeighbourhoodItem neighbourhood; // the neighbourhood technique
 	private DatasetReader reader; // dataset reader
 	private SimilarityMap simMap; // similarity map - stores all item-item similarities
 	
@@ -28,7 +28,7 @@ public class ItemBasedCF implements CFAlgorithm
 	 * @param metric - the user-user similarity metric
 	 * @param reader - dataset reader
 	 */
-	public ItemBasedCF(final Predictor predictor, final Neighbourhood neighbourhood, final SimilarityMetric metric, final DatasetReader reader)
+	public ItemBasedCF(final PredictorItem predictor, final NeighbourhoodItem neighbourhood, final SimilarityMetric metric, final DatasetReader reader)
 	{
 		this.predictor = predictor;
 		this.neighbourhood = neighbourhood;

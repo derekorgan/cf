@@ -9,6 +9,9 @@ package alg.ub;
 
 import java.io.File;
 
+import alg.ib.ItemBasedCF;
+import alg.ib.neighbourhood.*;
+import alg.ib.predictor.*;
 import alg.ub.neighbourhood.*;
 import alg.ub.predictor.*;
 import similarity.metric.*;
@@ -21,13 +24,15 @@ public class ExecuteUB
 	{
 		// configure the user-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
 		Predictor predictor = new Resnick();
+		PredictorItem ipredictor = new ResnickItem();
 		Neighbourhood neighbourhood = new NearestNeighbourhood(53);
+		NeighbourhoodItem ineighbourhood = new NearestNeighbourhoodItem(22);
 		SimilarityMetric metric = new Cosine();
 		
 		// set the paths and filenames of the item file, train file and test file ...
 		String itemFile = "FRT dataset" + File.separator + "r.item";
 		String trainFile = "FRT dataset" + File.separator + "r.train";
-		String testFile = "FRT dataset" + File.separator + "r.test";
+		String testFile = "FRT dataset" + File.separator + "r.probe";
 		
 		// set the path and filename of the output file ...
 		String outputFile = "results" + File.separator + "predictions.txt";
@@ -38,7 +43,8 @@ public class ExecuteUB
 		// - the output file is created
 		DatasetReader reader = new DatasetReader(itemFile, trainFile, testFile);
 		UserBasedCF ubcf = new UserBasedCF(predictor, neighbourhood, metric, reader);
-		Evaluator eval = new Evaluator(ubcf, reader.getTestData());
+		ItemBasedCF ibcf = new ItemBasedCF(ipredictor, ineighbourhood, metric, reader);
+		Evaluator eval = new Evaluator(ubcf,ibcf, reader.getTestData());
 		eval.writeResults(outputFile);
 		Double RMSE = eval.getRMSE();
 		if(RMSE != null) System.out.println("RMSE: " + RMSE);

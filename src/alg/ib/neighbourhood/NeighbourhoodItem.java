@@ -13,7 +13,7 @@ import java.util.Map;
 import profile.Profile;
 import similarity.SimilarityMap;
 
-public interface Neighbourhood 
+public interface NeighbourhoodItem 
 {
 	/**
 	 * @returns the neighbour IDs

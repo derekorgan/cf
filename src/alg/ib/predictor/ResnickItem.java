@@ -10,22 +10,22 @@ package alg.ib.predictor;
 import java.util.ArrayList;
 import java.util.Map;
 
-import alg.ib.neighbourhood.Neighbourhood;
+import alg.ib.neighbourhood.NeighbourhoodItem;
 import similarity.SimilarityMap;
 import profile.Profile;
 
 
-public class Resnick implements Predictor {
+public class ResnickItem implements PredictorItem {
 
 	/**
 	 * constructor - creates a new SimpleAveragePredictor object
 	 */
-	public Resnick()
+	public ResnickItem()
 	{
 		
 	}
 	
-	public Double getPrediction(final Integer itemId, final Integer userId, final Map<Integer,Profile> itemProfileMap, final Map<Integer,Profile> userProfileMap, final Neighbourhood neighbourhood, final SimilarityMap simMap)
+	public Double getPrediction(final Integer itemId, final Integer userId, final Map<Integer,Profile> itemProfileMap, final Map<Integer,Profile> userProfileMap, final NeighbourhoodItem neighbourhood, final SimilarityMap simMap)
 	{
 		double above = 0;
 		double below = 0;

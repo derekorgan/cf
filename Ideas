@@ -1,3 +1,12 @@
+signifigance weight
+
+default voting
+
+inverse user frequence
+
+average user and item based for hybrid.
+
+Include probe data for training
 
 Breese et al. (1998)
 
@@ -71,7 +80,7 @@ in the middle (there is some evidence cited in Kaptein's paper that this is the 
 non-parametric statistical tests which do not assume a normal distribution of the data. Furthermore, because of this it makes 
 no sense to report means of likert scale data--you should report the mode.
 
-Consider renormaise ratings onto a non-linear interval scale
+Consider re-normaise ratings onto a non-linear interval scale
 ---
 
 Can probability help in determining a prediction rating?

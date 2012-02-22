@@ -17,7 +17,7 @@ import java.util.Map;
 
 import profile.Profile;
 
-public class NearestNeighbourhood implements Neighbourhood 
+public class NearestNeighbourhoodItem implements NeighbourhoodItem 
 {
 	private final int k; // the number of neighbours in the neighbourhood
 	
@@ -25,7 +25,7 @@ public class NearestNeighbourhood implements Neighbourhood
 	 * constructor - creates a new NearestNeighbourhood object
 	 * @param k - the number of neighbours in the neighbourhood
 	 */
-	public NearestNeighbourhood(final int k)
+	public NearestNeighbourhoodItem(final int k)
 	{
 		this.k = k;
 	}

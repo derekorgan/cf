@@ -10,16 +10,16 @@ package alg.ib.predictor;
 import java.util.ArrayList;
 import java.util.Map;
 
-import alg.ib.neighbourhood.Neighbourhood;
+import alg.ib.neighbourhood.NeighbourhoodItem;
 import similarity.SimilarityMap;
 import profile.Profile;
 
-public class MeanPredictor implements Predictor 
+public class MeanPredictorItem implements PredictorItem 
 {
 	/**
 	 * constructor - creates a new SimpleAveragePredictor object
 	 */
-	public MeanPredictor()
+	public MeanPredictorItem()
 	{
 	}
 	
@@ -32,7 +32,7 @@ public class MeanPredictor implements Predictor
 	 * @param neighbourhood - a Neighbourhood object
 	 * @param simMap - a map containing user-user similarities
 	 */
-	public Double getPrediction(final Integer itemId, final Integer userId, final Map<Integer,Profile> itemProfileMap, final Map<Integer,Profile> userProfileMap, final Neighbourhood neighbourhood, final SimilarityMap simMap)
+	public Double getPrediction(final Integer itemId, final Integer userId, final Map<Integer,Profile> itemProfileMap, final Map<Integer,Profile> userProfileMap, final NeighbourhoodItem neighbourhood, final SimilarityMap simMap)
 	{
 		double above = 0;
 		

@@ -20,8 +20,8 @@ public class ExecuteIB
 	public static void main(String[] args)
 	{
 		// configure the item-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
-		Predictor predictor = new Resnick();
-		Neighbourhood neighbourhood = new NearestNeighbourhood(22);
+		PredictorItem predictor = new ResnickItem();
+		NeighbourhoodItem neighbourhood = new NearestNeighbourhoodItem(22);
 		SimilarityMetric metric = new Cosine();
 		
 		// set the paths and filenames of the item file, train file and test file ...
