@@ -8,6 +8,9 @@
 package alg.ub;
 
 import java.io.File;
+import java.util.Map;
+
+import profile.Profile;
 
 import alg.ib.ItemBasedCF;
 import alg.ib.neighbourhood.*;
@@ -44,35 +47,19 @@ public class ExecuteUB
 		DatasetReader reader = new DatasetReader(itemFile, trainFile, testFile);
 		UserBasedCF ubcf = new UserBasedCF(predictor, neighbourhood, metric, reader);
 		ItemBasedCF ibcf = new ItemBasedCF(ipredictor, ineighbourhood, metric, reader);
-
-		int n = 10;
-		Evaluator eval;
-		double bestRMSE = 100.0;
-		int bestwUser = 0;
-		int bestwItem = 0;
 		
-		for (int i=0; i<n+1; i++)
-		{
-			int wU = i;
-			int wI = n-i; 
-			eval = new Evaluator(ubcf,ibcf, reader.getTestData(),wU ,wI);
-			
-			eval.writeResults(outputFile);
-			Double RMSE = eval.getRMSE();
-			if(RMSE != null) System.out.println("User Weight:   "+ wU +"    Item Weight: "+ wI +"    RMSE: " + RMSE);
-			
-			if(RMSE < bestRMSE) 
-			{
-				bestRMSE = RMSE;
-				bestwUser = wU;
-				bestwItem = wI;
+		//get user profile map and item profile map so it can be used in the evaluator.
+		Map<Integer,Profile> userProfileMap = ubcf.getUserProfiles();
+		Map<Integer,Profile> itemProfileMap = ibcf.getItemProfiles();
 				
-			}
-			
-			//double coverage = eval.getCoverage();
-			//System.out.println("coverage: " + coverage + "%");
-		}
-		System.out.println("User Weight:   "+ bestwUser +"    Item Weight: "+ bestwItem +"    Best RMSE: " + bestRMSE);
+		Evaluator eval = new Evaluator(ubcf,ibcf, reader.getTestData(), userProfileMap, itemProfileMap,3,7);
+		
+		eval.writeResults(outputFile);
+		Double RMSE = eval.getRMSE();
+		if(RMSE != null) System.out.println("RMSE: " + RMSE);
+		double coverage = eval.getCoverage();
+		System.out.println("coverage: " + coverage + "%");
+		
 
 	}
 }

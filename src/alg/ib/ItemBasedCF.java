@@ -7,6 +7,9 @@
 
 package alg.ib;
 
+import java.util.Map;
+
+import profile.Profile;
 import alg.CFAlgorithm;
 import alg.ib.neighbourhood.NeighbourhoodItem;
 import alg.ib.predictor.PredictorItem;
@@ -47,5 +50,14 @@ public class ItemBasedCF implements CFAlgorithm
 		
 		return predictor.getPrediction(itemId, userId, reader.getItemProfiles(), reader.getUserProfiles(), neighbourhood, simMap);
 
+	}
+	
+	/**
+	 * Returns all the item profiles loaded.
+	 * @return a HashMap containing item profiles
+	 */
+	public Map<Integer,Profile> getItemProfiles()
+	{
+		return reader.getItemProfiles();
 	}
 }

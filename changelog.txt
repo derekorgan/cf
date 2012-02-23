@@ -5,6 +5,34 @@ CHANGE LOG
 
 WEEK 4
 -------------------------------------------------------------------------------------
+
+v0.11 - I added the global averages for user and items to the blending of predictions  
+----------------------------------------
+
+Next I tried adding a lower weighted global average of user and items to the weighted calculation. 
+by using the global average of the two I didn't find any improvement in the RMSE. 
+I then tried some fixed values to see if tending to a overall average would help.
+I found that 3.7 gave a slightly better over all RMSE of 0.9853882392739892
+
+
+some code in the evaluator.java file..
+			...
+			// Get global average for this user and item.
+			double globalU = userProfileMap.get(pair.getUserId()).getMeanValue();
+			double globalI = itemProfileMap.get(pair.getItemId()).getMeanValue();	
+			double global = (globalI + globalU) / 2;
+			
+			// weighted Average user and Item based prediction
+			Double predictedRating = ((wU*upredictedRating) + (wI*ipredictedRating) + 3.7)/ (wU+wI+1); 
+			...
+			
+As you can see in the final code I didn't actually use the Globals as they were not returning a better RMSE.
+I may need to revisit this to factor in some weighting based on the number of neighbours with similarity threshold.
+
+RMSE: 0.9853882392739892
+Coverage: 100%
+
+
 v0.10 - Weighed item and user based predictions average 
 ----------------------------------------
 I now wanted to test the weighted averages for user and item based predictions. 
@@ -30,7 +58,7 @@ I wrote a short bit of code to find the best result based on a fixed weighting. 
 based algorithm is weighed more. 
 
 Here is the code I used to generate this list in evaluator.java 
-
+        ...
 		int n = 10;
 		Evaluator eval;
 		double bestRMSE = 100.0;
@@ -59,7 +87,7 @@ Here is the code I used to generate this list in evaluator.java
 			//System.out.println("coverage: " + coverage + "%");
 		}
 		System.out.println("User Weight:   "+ bestwUser +"    Item Weight: "+ bestwItem +"    Best RMSE: " + bestRMSE);
-
+		...
 
 RMSE: 0.986987251320099
 Coverage: 100%

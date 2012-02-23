@@ -7,6 +7,9 @@
 
 package alg.ub;
 
+import java.util.Map;
+
+import profile.Profile;
 import alg.CFAlgorithm;
 import alg.ub.neighbourhood.Neighbourhood;
 import alg.ub.predictor.Predictor;
@@ -44,5 +47,14 @@ public class UserBasedCF implements CFAlgorithm
 	public Double getPrediction(final Integer userId, final Integer itemId)
 	{	
 		return predictor.getPrediction(userId, itemId, reader.getUserProfiles(), reader.getItemProfiles(), neighbourhood, simMap);
+	}
+	
+	/**
+	 * Returns all the user profiles loaded.
+	 * @return a HashMap containing user profiles
+	 */
+	public Map<Integer,Profile> getUserProfiles()
+	{
+		return reader.getUserProfiles();
 	}
 }
