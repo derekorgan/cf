@@ -28,7 +28,7 @@ public class Evaluator
 	 * @param alf - the CF algorithm
 	 * @param testData - a map containing the test data
 	 */
-	public Evaluator(final CFAlgorithm ualg, final CFAlgorithm ialg, final Map<UserItemPair,Double> testData)
+	public Evaluator(final CFAlgorithm ualg, final CFAlgorithm ialg, final Map<UserItemPair,Double> testData,int wU, int wI)
 	{
 		results = new HashMap<UserItemPair,RatingsPair>(); // instantiate the results hash map
 		
@@ -42,11 +42,11 @@ public class Evaluator
 			// Item based 
 			Double ipredictedRating = ialg.getPrediction(pair.getUserId(), pair.getItemId());
 			// Average user and Item based.
-			Double predictedRating = (upredictedRating + ipredictedRating)/ 2; 
+			Double predictedRating = ((wU*upredictedRating) + (wI*ipredictedRating))/ (wU+wI); 
 			
 			results.put(pair, new RatingsPair(actualRating, predictedRating));
 			
-			System.out.println(pair.getUserId() + " " +  pair.getItemId() + " " + actualRating + " " + predictedRating);
+			//System.out.println(pair.getUserId() + " " +  pair.getItemId() + " " + actualRating + " " + predictedRating);
 		}
 	}
 

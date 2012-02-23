@@ -7,8 +7,62 @@ WEEK 4
 -------------------------------------------------------------------------------------
 v0.10 - Weighed item and user based predictions average 
 ----------------------------------------
+I now wanted to test the weighted averages for user and item based predictions. 
+I used a 10 point scaled to see what returned the optimal point testing at each variation. 
+Since Item based filtering on its own returns better values than user based i'm expecting more weight
+for item based filtering.
+
+User Weight:   0    Item Weight: 10    RMSE: 0.9890844621387777
+User Weight:   1    Item Weight: 9     RMSE: 0.9877628943642665
+User Weight:   2    Item Weight: 8     RMSE: 0.9870633832185663
+User Weight:   3    Item Weight: 7     RMSE: 0.986987251320099
+User Weight:   4    Item Weight: 6     RMSE: 0.9875346428431868
+User Weight:   5    Item Weight: 5     RMSE: 0.9887045221561092
+User Weight:   6    Item Weight: 4     RMSE: 0.9904946835889381
+User Weight:   7    Item Weight: 3     RMSE: 0.9929017721171909
+User Weight:   8    Item Weight: 2     RMSE: 0.9959213145115824
+User Weight:   9    Item Weight: 1     RMSE: 0.9995477602861148
+User Weight:   10    Item Weight: 0    RMSE: 1.0037745315841622
+
+User Weight:   3    Item Weight: 7    Best RMSE: 0.986987251320099
+
+I wrote a short bit of code to find the best result based on a fixed weighting. As expected the item
+based algorithm is weighed more. 
+
+Here is the code I used to generate this list in evaluator.java 
+
+		int n = 10;
+		Evaluator eval;
+		double bestRMSE = 100.0;
+		int bestwUser = 0;
+		int bestwItem = 0;
+		
+		for (int i=0; i<n+1; i++)
+		{
+			int wU = i;
+			int wI = n-i; 
+			eval = new Evaluator(ubcf,ibcf, reader.getTestData(),wU ,wI);
+			
+			eval.writeResults(outputFile);
+			Double RMSE = eval.getRMSE();
+			if(RMSE != null) System.out.println("User Weight:   "+ wU +"    Item Weight: "+ wI +"    RMSE: " + RMSE);
+			
+			if(RMSE < bestRMSE) 
+			{
+				bestRMSE = RMSE;
+				bestwUser = wU;
+				bestwItem = wI;
+				
+			}
+			
+			//double coverage = eval.getCoverage();
+			//System.out.println("coverage: " + coverage + "%");
+		}
+		System.out.println("User Weight:   "+ bestwUser +"    Item Weight: "+ bestwItem +"    Best RMSE: " + bestRMSE);
 
 
+RMSE: 0.986987251320099
+Coverage: 100%
 
 
 v0.09 - Hybrid Item and User Based 
@@ -54,7 +108,7 @@ k >         coverage         RSME
 
 All items have a minimum of 7 neighbours as coverage is 100% up to this point.
 
-The main conclusion is setting a min size has a negligible effect on the RSME and I'm leaving it at 0.
+The main conclusion is setting a min size has a negligible effect on the RSME and I'm leaving it at 0 for now.
 
 v0.07 - Updated K neighbours size for Item based filtering
 ----------------------------------------

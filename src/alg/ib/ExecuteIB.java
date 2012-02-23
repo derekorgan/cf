@@ -44,7 +44,7 @@ public class ExecuteIB
 		System.out.println("Users: " + users);
 		
 		ItemBasedCF ibcf = new ItemBasedCF(predictor, neighbourhood, metric, reader);
-		Evaluator eval = new Evaluator(ibcf, reader.getTestData());
+		Evaluator eval = new Evaluator(ibcf, ibcf, reader.getTestData(), 5,5);
 		eval.writeResults(outputFile);
 		Double RMSE = eval.getRMSE();
 		if(RMSE != null) System.out.println("RMSE: " + RMSE);
