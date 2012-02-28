@@ -14,8 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Iterator;
 
-import profile.Profile;
-
 import alg.CFAlgorithm;
 
 import util.RatingsPair;
@@ -30,31 +28,18 @@ public class Evaluator
 	 * @param alf - the CF algorithm
 	 * @param testData - a map containing the test data
 	 */
-	public Evaluator(final CFAlgorithm ualg, final CFAlgorithm ialg, final Map<UserItemPair,Double> testData,final Map<Integer,Profile> userProfileMap,final Map<Integer,Profile> itemProfileMap ,int wU, int wI)
+	public Evaluator(final CFAlgorithm alg, final Map<UserItemPair,Double> testData)
 	{
 		results = new HashMap<UserItemPair,RatingsPair>(); // instantiate the results hash map
-		
+
 		for(Iterator<Map.Entry<UserItemPair,Double>> it = testData.entrySet().iterator(); it.hasNext(); ) // iterate over test data and make predictions for all user-item pairs
 		{
 			Map.Entry<UserItemPair,Double> entry = (Map.Entry<UserItemPair,Double>)it.next();
 			UserItemPair pair = entry.getKey();
 			Double actualRating = entry.getValue();
-			
-			// User based
-			Double upredictedRating = ualg.getPrediction(pair.getUserId(), pair.getItemId());
-			// Item based 
-			Double ipredictedRating = ialg.getPrediction(pair.getUserId(), pair.getItemId());
-			
-			// Get global average for this user and item.
-			double globalU = userProfileMap.get(pair.getUserId()).getMeanValue();
-			double globalI = itemProfileMap.get(pair.getItemId()).getMeanValue();	
-			double global = (globalI + globalU) / 2;
-			
-			// weighed average user and Item based prediction.
-			Double predictedRating = ((wU*upredictedRating) + (wI*ipredictedRating) + 3.7 )/ (wU+wI+1); 
-			
+			Double predictedRating = alg.getPrediction(pair.getUserId(), pair.getItemId());
 			results.put(pair, new RatingsPair(actualRating, predictedRating));
-			
+
 			//System.out.println(pair.getUserId() + " " +  pair.getItemId() + " " + actualRating + " " + predictedRating);
 		}
 	}

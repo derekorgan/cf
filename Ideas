@@ -4,7 +4,7 @@ default voting
 
 inverse user frequence
 
-average user and item based for hybrid.
+- average user and item based for hybrid.
 
 Include probe data for training
 
@@ -16,13 +16,11 @@ Implement a Trust based system on top of Resnick
 
 Use amplifications of neighbours with higher similarity
 
-Also use Item based collaborative filtering hybrid
+- Also use Item based collaborative filtering hybrid
 
 Cross-verification folding
 
 Use content based recommendations hybrid e.g. genre Use the Genre tags to help with predictions?
-
-fill in all of the empty cells with the average rating for that movie
 
 SVD
 
@@ -85,6 +83,3 @@ Consider re-normaise ratings onto a non-linear interval scale
 
 Can probability help in determining a prediction rating?
 
----
-
-Possibly use the probe data as extra training data for predicitons of test data

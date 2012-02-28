@@ -5,24 +5,35 @@
  * 20/01/2011
  */
 
-package alg.ib;
+package alg.hybrid;
 
 import java.io.File;
 
 import alg.ib.neighbourhood.*;
 import alg.ib.predictor.*;
+import alg.ub.neighbourhood.*;
+import alg.ub.predictor.*;
 import similarity.metric.*;
 import util.evaluator.Evaluator;
 import util.reader.DatasetReader;
 
-public class ExecuteIB
+public class ExecuteHybrid
 {
 	public static void main(String[] args)
 	{
-		// configure the item-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
-		PredictorItem predictor = new ResnickItem();
-		NeighbourhoodItem neighbourhood = new NearestNeighbourhoodItem(22);
-		SimilarityMetric metric = new Cosine();
+		// configure the user-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
+		Predictor userPredictor = new Resnick();
+		Neighbourhood userNeighbourhood = new NearestNeighbourhood(53);
+		SimilarityMetric userMetric = new Cosine();
+		
+		// configure the item-based CF alogrithm - set the predictor, neighbourhood and similarity metric ...
+		PredictorItem itemPredictor = new ResnickItem();
+		NeighbourhoodItem itemNeighbourhood = new NearestNeighbourhoodItem(22);
+		SimilarityMetric itemMetric = new Cosine();	
+		
+		//Hybrid Weights for average of user and item based algorithm
+		int userWeight = 3;
+		int itemWeight = 7;
 		
 		// set the paths and filenames of the item file, train file and test file ...
 		String itemFile = "FRT dataset" + File.separator + "r.item";
@@ -37,13 +48,16 @@ public class ExecuteIB
 		// - the RMSE (if actual ratings are available) and coverage are output to screen
 		// - the output file is created
 		DatasetReader reader = new DatasetReader(itemFile, trainFile, testFile);
-		ItemBasedCF ibcf = new ItemBasedCF(predictor, neighbourhood, metric, reader);
-		Evaluator eval = new Evaluator(ibcf, reader.getTestData());
+		HybridCF hybrid = new HybridCF(userPredictor, itemPredictor, userNeighbourhood, itemNeighbourhood, userMetric, itemMetric, reader, userWeight, itemWeight);
+		Evaluator eval = new Evaluator(hybrid, reader.getTestData());
+		
 		eval.writeResults(outputFile);
 		Double RMSE = eval.getRMSE();
 		if(RMSE != null) System.out.println("RMSE: " + RMSE);
 		double coverage = eval.getCoverage();
 		System.out.println("coverage: " + coverage + "%");
+		
+
 	}
 }
 	

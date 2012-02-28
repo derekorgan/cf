@@ -6,10 +6,27 @@ CHANGE LOG
 WEEK 4
 -------------------------------------------------------------------------------------
 
+
+v0.12 - Code Re-factoring and Minimum neighbourhood size
+----------------------------------------
+
+I realized I need to change the way the code is organized. I'm currently combining the predictions from user based
+and item based CF in the Evaluator.java.  It would be more appropriate to create a new class for the hybrid algorighm.
+
+I created a new package alg.hybrid with ExecuteHybrid.java and HybridCF.java.  
+
+I also tidied up the alg.ub and alg.ib packages so they can still work on there own. 
+
+Lastly tried one more time to change the neighbourhood minimum sizes in the Resnick function and found a small improvement
+on the probe data. There is a very small drop off in coverage.
+
+RMSE: 0.9850593918879252
+coverage: 99.88956377691883%
+
 v0.11 - I added the global averages for user and items to the blending of predictions  
 ----------------------------------------
 
-Next I tried adding a lower weighted global average of user and items to the weighted calculation. 
+Next I tried adding a low weighted global average of user and items to the weighted calculation. 
 by using the global average of the two I didn't find any improvement in the RMSE. 
 I then tried some fixed values to see if tending to a overall average would help.
 I found that 3.7 gave a slightly better over all RMSE of 0.9853882392739892
@@ -36,7 +53,7 @@ Coverage: 100%
 v0.10 - Weighed item and user based predictions average 
 ----------------------------------------
 I now wanted to test the weighted averages for user and item based predictions. 
-I used a 10 point scaled to see what returned the optimal point testing at each variation. 
+I used a 10 point scale to see what returned the optimal point testing at each variation. 
 Since Item based filtering on its own returns better values than user based i'm expecting more weight
 for item based filtering.
 
@@ -71,7 +88,7 @@ Here is the code I used to generate this list in evaluator.java
 			int wI = n-i; 
 			eval = new Evaluator(ubcf,ibcf, reader.getTestData(),wU ,wI);
 			
-			eval.writeResults(outputFile);
+			//eval.writeResults(outputFile);
 			Double RMSE = eval.getRMSE();
 			if(RMSE != null) System.out.println("User Weight:   "+ wU +"    Item Weight: "+ wI +"    RMSE: " + RMSE);
 			

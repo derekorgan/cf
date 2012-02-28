@@ -53,7 +53,7 @@ public class Resnick implements Predictor {
 			below += Math.abs(sim); 
 		}
 		
-		if(neighbours.size() > 0)
+		if(neighbours.size() > 7)
 			return new Double(u_mean + (above / below));
 		else
 			return null;

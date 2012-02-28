@@ -53,7 +53,7 @@ public class ResnickItem implements PredictorItem {
 			below += Math.abs(sim); 
 		}
 		
-		if(neighbours.size() > 0)
+		if(neighbours.size() > 11)
 			return new Double(i_mean + (above / below));
 		else
 			return null;
