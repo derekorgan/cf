@@ -35,15 +35,16 @@ public class DatasetReader
 	 */
 	public DatasetReader(final String itemFile, final String trainFile, final String testFile)
 	{
+		userProfileMap = new HashMap<Integer,Profile>();
+		itemProfileMap = new HashMap<Integer,Profile>();
+		
 		loadItems(itemFile); // must be called before loadProfiles()
 		loadProfiles(trainFile);
-		
 		// If we doing the test then use the probe data as training as well. 
-		//if(testFile.equals("FRT dataset" + File.separator + "r.test")) 
-		//{
-		//	loadProfiles("FRT dataset" + File.separator + "r.probe");
-		//}
+		if(testFile.equals("FRT dataset" + File.separator + "r.test")) 
+			loadProfiles("FRT dataset" + File.separator + "r.probe");
 		loadTestData(testFile);
+		
 	}
 
 	/**
@@ -98,8 +99,7 @@ public class DatasetReader
 	 */
 	private void loadProfiles(final String filename) 
 	{
-		userProfileMap = new HashMap<Integer,Profile>();
-		itemProfileMap = new HashMap<Integer,Profile>();
+
 		
 		try
 		{

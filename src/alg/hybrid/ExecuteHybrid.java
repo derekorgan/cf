@@ -39,7 +39,7 @@ public class ExecuteHybrid
 		// set the paths and filenames of the item file, train file and test file ...
 		String itemFile = "FRT dataset" + File.separator + "r.item";
 		String trainFile = "FRT dataset" + File.separator + "r.train";
-		String testFile = "FRT dataset" + File.separator + "r.test";
+		String testFile = "FRT dataset" + File.separator + "r.probe";
 		
 		// set the path and filename of the output file ...
 		String outputFile = "results" + File.separator + "predictions.txt";

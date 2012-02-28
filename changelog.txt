@@ -9,6 +9,17 @@ https://github.com/derekorgan/cf
 Note: This github repository is private until week 5 deadline has passed. 
 
 ------------------------------------------------------------------------------------
+-- WEEK 5
+-------------------------------------------------------------------------------------
+
+v0.14 - Updated the reader to use the probe data as training data
+----------------------------------------
+
+This should help with the predictions on the r.test file because it has more training data to learn from.
+
+
+
+------------------------------------------------------------------------------------
 -- WEEK 4
 -------------------------------------------------------------------------------------
 
