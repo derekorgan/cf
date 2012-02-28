@@ -1,14 +1,44 @@
 Derek Organ - 11283394
 Collective Intelligence - Project 2
 
-CHANGE LOG
+CHANGE LOG -
 
-WEEK 4
+To see all commits and changes you can also view my github repository for this project.
+https://github.com/derekorgan/cf 
+
+Note: This github repository is private until week 5 deadline has passed. 
+
+------------------------------------------------------------------------------------
+-- WEEK 4
 -------------------------------------------------------------------------------------
+
+v0.13 - Added significance weighting 
+----------------------------------------
+
+I added significance weighting to the similarity metric for Cosine and Pearson
+
+I created a double loop in the ExecuteHybrid to try the ranges of 1-5 and 5-75 in increments of 5 to 
+test the best combination of max values for the significance. 
+
+The best combination was no significance for user e.g. MAX = 1 and a max value of 3 for Item 
+
+RMSE: 0.9850593918879242    max user sig :1       max item sig :1
+RMSE: 0.9851617636433982    max user sig :1       max item sig :2
+RMSE: 0.9848579095001863    max user sig :1       max item sig :3
+RMSE: 0.9853052675535504    max user sig :1       max item sig :4
+RMSE: 0.9852341878181543    max user sig :2       max item sig :1
+RMSE: 0.985335793502781     max user sig :2       max item sig :2
+...
+
+In summary there really is little or no improvement using significance weighting on this data set.
+
+RMSE: 0.9848579095001863
+coverage: 99.88956377691883%
 
 
 v0.12 - Code Re-factoring and Minimum neighbourhood size
 ----------------------------------------
+https://github.com/derekorgan/cf/commit/ec5cfdab7dfdae24aaa522587cf74a31b2030d9c
 
 I realized I need to change the way the code is organized. I'm currently combining the predictions from user based
 and item based CF in the Evaluator.java.  It would be more appropriate to create a new class for the hybrid algorighm.
@@ -17,14 +47,19 @@ I created a new package alg.hybrid with ExecuteHybrid.java and HybridCF.java.
 
 I also tidied up the alg.ub and alg.ib packages so they can still work on there own. 
 
-Lastly tried one more time to change the neighbourhood minimum sizes in the Resnick function and found a small improvement
+Lastly I tried one more time to change the neighbourhood minimum sizes in the Resnick function and found a small improvement
 on the probe data. There is a very small drop off in coverage.
+
+I found a minimum of 7 neighbours for users and a max of 53
+with a minimum of 11 neighbours for items and a max of 22 had the lowest result.
 
 RMSE: 0.9850593918879252
 coverage: 99.88956377691883%
 
+
 v0.11 - I added the global averages for user and items to the blending of predictions  
 ----------------------------------------
+https://github.com/derekorgan/cf/commit/4c749e17f14fe4da5240a24ac4569668a630ce24
 
 Next I tried adding a low weighted global average of user and items to the weighted calculation. 
 by using the global average of the two I didn't find any improvement in the RMSE. 
@@ -52,6 +87,8 @@ Coverage: 100%
 
 v0.10 - Weighed item and user based predictions average 
 ----------------------------------------
+https://github.com/derekorgan/cf/commit/b7ad5127c4c5c8f322354d712045d1830782b674
+
 I now wanted to test the weighted averages for user and item based predictions. 
 I used a 10 point scale to see what returned the optimal point testing at each variation. 
 Since Item based filtering on its own returns better values than user based i'm expecting more weight
@@ -182,8 +219,10 @@ RMSE: 0.992956721533153
 coverage: 100.0%
 
 
-WEEK 2/3
+------------------------------------------------------------------------------------
+-- WEEK 2/3
 -------------------------------------------------------------------------------------
+
 v0.05 - Updated the Item Class to include other attributes such as year	
 ----------------------------------------
 I've added year as an accessible attribute of item.
@@ -207,8 +246,10 @@ Cosine + Resnick
 RMSE: 1.0037745315841637
 coverage: 100.0%
 
-WEEK 1
+------------------------------------------------------------------------------------
+-- WEEK 1
 -------------------------------------------------------------------------------------
+
 v0.03 - Tested Pearson Similarity correlation - Feb 7. 2012
 ----------------------------------------
 
@@ -251,7 +292,7 @@ v0.01 - Fixed Bugs - Feb 2nd, 2012
 
 I found and fixed the two bugs. 
 
-* Cosine Algorihtm was in correct
+* Cosine Algorithm was incorrect
 * Index in for loop for Mean Predictor referenced first item instead of incrementing.
 
 Result RSME: 1.134420381930053

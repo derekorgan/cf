@@ -1,12 +1,12 @@
-signifigance weight
+significance weighting
 
 default voting
 
-inverse user frequence
+inverse user frequency
 
 - average user and item based for hybrid.
 
-Include probe data for training
+Include probe data for training on test data
 
 Breese et al. (1998)
 

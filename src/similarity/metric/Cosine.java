@@ -13,11 +13,14 @@ import profile.Profile;
 
 public class Cosine implements SimilarityMetric
 {
+	private double max; // max value in significance weighting 
+	
 	/**
 	 * constructor - creates a new CosineMetric object
 	 */
-	public Cosine()
+	public Cosine(double max)
 	{
+		this.max = max;
 	}
 	
 	/**
@@ -30,6 +33,7 @@ public class Cosine implements SimilarityMetric
         double dotProduct = 0;
         
         Set<Integer> common = p1.getCommonIds(p2);
+
 		for(Integer id: common)
 		{
 			double r1 = p1.getValue(id).doubleValue();
@@ -39,6 +43,9 @@ public class Cosine implements SimilarityMetric
 
 		double n1 = p1.getNorm();
 		double n2 = p2.getNorm();
-		return (n1 > 0 && n2 > 0) ? dotProduct / (n1 * n2) : 0;
+		return (n1 > 0 && n2 > 0) ? (dotProduct / (n1 * n2)) * (Math.min(Math.abs((double)common.size()), max)/max )  : 0;
 	}
+
+	
+	
 }

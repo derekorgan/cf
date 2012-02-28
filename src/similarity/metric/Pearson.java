@@ -14,11 +14,13 @@ import profile.Profile;
 public class Pearson implements SimilarityMetric
 {
 
+	private double max;
 	/**
 	 * constructor - creates a new PearsonMetric object
 	 */
-	public Pearson()
+	public Pearson(double max)
 	{
+		this.max = max;
 	}
 	
 	/**
@@ -43,7 +45,7 @@ public class Pearson implements SimilarityMetric
 			base2 += Math.pow(r2, 2);
 		}
 		
-		return (base1 > 0 && base2 > 0) ? top / (Math.sqrt(base1) * Math.sqrt(base2)) : 0;
+		return (base1 > 0 && base2 > 0) ? (top / (Math.sqrt(base1) * Math.sqrt(base2)))  * (Math.min(Math.abs(common.size()), max)/max ) : 0;
 	}
 	
 	

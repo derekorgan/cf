@@ -21,15 +21,20 @@ public class ExecuteHybrid
 {
 	public static void main(String[] args)
 	{
+		double bestRMSE = 1000.0;
+		
+		for (int i = 1; i< 5; i++) {
+			for (int j = 1; j< 5; j++) {
+		
 		// configure the user-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
 		Predictor userPredictor = new Resnick();
 		Neighbourhood userNeighbourhood = new NearestNeighbourhood(53);
-		SimilarityMetric userMetric = new Cosine();
+		SimilarityMetric userMetric = new Cosine(i);
 		
 		// configure the item-based CF alogrithm - set the predictor, neighbourhood and similarity metric ...
 		PredictorItem itemPredictor = new ResnickItem();
 		NeighbourhoodItem itemNeighbourhood = new NearestNeighbourhoodItem(22);
-		SimilarityMetric itemMetric = new Cosine();	
+		SimilarityMetric itemMetric = new Cosine(j);	
 		
 		//Hybrid Weights for average of user and item based algorithm
 		int userWeight = 3;
@@ -41,7 +46,7 @@ public class ExecuteHybrid
 		String testFile = "FRT dataset" + File.separator + "r.probe";
 		
 		// set the path and filename of the output file ...
-		String outputFile = "results" + File.separator + "predictions.txt";
+		//String outputFile = "results" + File.separator + "predictions.txt";
 		
 		////////////////////////////////////////////////
 		// Evaluates the CF algorithm (do not change!!):
@@ -51,11 +56,19 @@ public class ExecuteHybrid
 		HybridCF hybrid = new HybridCF(userPredictor, itemPredictor, userNeighbourhood, itemNeighbourhood, userMetric, itemMetric, reader, userWeight, itemWeight);
 		Evaluator eval = new Evaluator(hybrid, reader.getTestData());
 		
-		eval.writeResults(outputFile);
+		//eval.writeResults(outputFile);
 		Double RMSE = eval.getRMSE();
-		if(RMSE != null) System.out.println("RMSE: " + RMSE);
-		double coverage = eval.getCoverage();
-		System.out.println("coverage: " + coverage + "%");
+		if(RMSE != null) System.out.println("RMSE: " + RMSE+ "    max user sig :"+i+"       max item sig :"+j);
+		//double coverage = eval.getCoverage();
+		//System.out.println("coverage: " + coverage + "%");
+		
+		if (RMSE < bestRMSE) bestRMSE = RMSE;
+			
+			}
+		} 
+		
+		System.out.println("Best RMSE: " + bestRMSE);
+		
 		
 
 	}
