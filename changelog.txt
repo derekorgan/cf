@@ -14,6 +14,7 @@ Note: This github repository is private until week 5 deadline has passed.
 
 v0.13 - Added significance weighting 
 ----------------------------------------
+https://github.com/derekorgan/cf/commit/7294ca5257671419ec9b4531a85b56cb6e992184
 
 I added significance weighting to the similarity metric for Cosine and Pearson
 

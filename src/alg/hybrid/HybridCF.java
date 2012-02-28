@@ -62,8 +62,8 @@ public class HybridCF implements CFAlgorithm
 	{	
 		Double uPrediction = userPredictor.getPrediction(userId, itemId, reader.getUserProfiles(), reader.getItemProfiles(), userNeighbourhood, userSimMap);
 		Double iPrediction = itemPredictor.getPrediction(itemId, userId, reader.getItemProfiles(), reader.getUserProfiles(), itemNeighbourhood, itemSimMap);
-		
-		// it is possible one algorithm may not have coverage so return the other one if it isn't null else return null 
+
+		// it is possible one algorithm may not have coverage so return the other one if it null 
 		if ((uPrediction == null) && (iPrediction == null)) {
 			return null;
 		} else if (uPrediction == null) {
@@ -79,7 +79,11 @@ public class HybridCF implements CFAlgorithm
 	
 	private Double weightedAverage(double uP, double iP)
 	{
-		return ( (userWeight * uP) + (itemWeight * iP) + 3.7 ) / (userWeight + itemWeight + 1);
+		double p = ( (userWeight * uP) + (itemWeight * iP) + 3.7) / (userWeight + itemWeight + 1);
+		
+		if (p > 5) p = 5.0;
+		
+		return p ;
 	}
 	
 

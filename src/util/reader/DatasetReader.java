@@ -37,6 +37,12 @@ public class DatasetReader
 	{
 		loadItems(itemFile); // must be called before loadProfiles()
 		loadProfiles(trainFile);
+		
+		// If we doing the test then use the probe data as training as well. 
+		//if(testFile.equals("FRT dataset" + File.separator + "r.test")) 
+		//{
+		//	loadProfiles("FRT dataset" + File.separator + "r.probe");
+		//}
 		loadTestData(testFile);
 	}
 

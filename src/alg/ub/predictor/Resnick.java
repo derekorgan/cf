@@ -49,6 +49,10 @@ public class Resnick implements Predictor {
 
 			double sim = simMap.getSimilarity(userId,neighbours.get(i));
 			
+			// added inverse user frequency --- wrong calculation.. should be on each co rated item not the item in to be predicted.. 
+			//double inverse = Math.log(userProfileMap.size()/itemProfileMap.get(itemId).getSize());
+			//sim = sim * inverse;
+			
 			above += n_diff * sim;
 			below += Math.abs(sim); 
 		}
