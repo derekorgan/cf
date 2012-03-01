@@ -22,6 +22,8 @@ Cross-verification folding
 
 Use content based recommendations hybrid e.g. genre Use the Genre tags to help with predictions?
 
+If the standard deviation of a user ratings are low then give user filtering higher weights than item
+
 SVD
 
 ---

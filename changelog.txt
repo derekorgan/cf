@@ -12,6 +12,32 @@ Note: This github repository is private until week 5 deadline has passed.
 -- WEEK 5
 -------------------------------------------------------------------------------------
 
+v0.15 - Significance Weighting with Pearson Similarity 
+----------------------------------------
+
+Tested Pearson to see if significance weighting would improve it.  After an extensive test of many variations 
+I found an improvement on pearson with no significance weighting but not better than the current Cosine numbers
+RMSE: 1.0060005117816373     User Significance:1    Item Significance: 1  < no significance weighting
+...
+RMSE: 0.9921258089791603     User Significance:90    Item Significance: 60
+RMSE: 0.9921178026898955     User Significance:90    Item Significance: 65
+RMSE: 0.9921154630905042     User Significance:90    Item Significance: 70
+RMSE: 0.9921154630905042     User Significance:90    Item Significance: 75
+> RMSE: 0.9921154630905026     User Significance:90    Item Signifcance: 80
+RMSE: 0.9921154630905039     User Significance:90    Item Significance: 85
+RMSE: 0.9921154630905052     User Significance:90    Item Significance: 90
+RMSE: 0.992115463090504     User Significance:90    Item Significance: 95
+RMSE: 0.9921154630905036     User Significance:90    Item Significance: 100
+...
+
+The best score was with a MAX of 90 for user based and a MAX of 80 for Item.
+
+Pearson without SW      1.0060005117816373
+Pearson with SW			0.9921154630905026
+Cosine 					0.9848579095001863			
+
+So over all Cosine is still better.
+
 v0.14 - Updated the reader to use the probe data as training data
 ----------------------------------------
 
@@ -27,7 +53,7 @@ v0.13 - Added significance weighting
 ----------------------------------------
 https://github.com/derekorgan/cf/commit/7294ca5257671419ec9b4531a85b56cb6e992184
 
-I added significance weighting to the similarity metric for Cosine and Pearson
+I added significance weighting to the similarity metric for Cosine 
 
 I created a double loop in the ExecuteHybrid to try the ranges of 1-5 and 5-75 in increments of 5 to 
 test the best combination of max values for the significance. 
@@ -42,7 +68,7 @@ RMSE: 0.9852341878181543    max user sig :2       max item sig :1
 RMSE: 0.985335793502781     max user sig :2       max item sig :2
 ...
 
-In summary there really is little or no improvement using significance weighting on this data set.
+In summary there really is little or no improvement using significance weighting on this data set with cosine.
 
 RMSE: 0.9848579095001863
 coverage: 99.88956377691883%

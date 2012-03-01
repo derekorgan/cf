@@ -30,7 +30,7 @@ public class Pearson implements SimilarityMetric
 	 */
 	public double getSimilarity(final Profile p1, final Profile p2)
 	{
-       
+
 		double top = 0;
 		double base1 = 0;
 		double base2 = 0;
@@ -45,6 +45,7 @@ public class Pearson implements SimilarityMetric
 			base2 += Math.pow(r2, 2);
 		}
 		
+		//(Math.min(Math.abs((double)common.size()), max)/max < significance weighting 
 		return (base1 > 0 && base2 > 0) ? (top / (Math.sqrt(base1) * Math.sqrt(base2)))  * (Math.min(Math.abs(common.size()), max)/max ) : 0;
 	}
 	

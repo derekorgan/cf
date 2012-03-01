@@ -37,6 +37,8 @@ public class UserBasedCF implements CFAlgorithm
 		this.neighbourhood = neighbourhood;
 		this.reader = reader;
 		this.simMap = new SimilarityMap(reader.getUserProfiles(), metric); // compute all user-user similarities
+		
+		System.out.println(simMap.toString());
 	}
 	
 	/**
