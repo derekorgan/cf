@@ -45,7 +45,7 @@ public class Cosine implements SimilarityMetric
 		double n2 = p2.getNorm();
 		
 		// (Math.min(Math.abs((double)common.size()), max)/max  < significance weighting 	
-		return (n1 > 0 && n2 > 0) ? (dotProduct / (n1 * n2)) * (Math.min(Math.abs((double)common.size()), max)/max )  : 0;
+		return (n1 > 0 && n2 > 0) ? (dotProduct / (n1 * n2)) * (Math.min(Math.abs(common.size()), max)/max )  : 0;
 	}
 
 	

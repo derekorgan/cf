@@ -12,8 +12,52 @@ Note: This github repository is private until week 5 deadline has passed.
 -- WEEK 5
 -------------------------------------------------------------------------------------
 
+
+v0.17 - Hybrid Cosine and Pearson Similarity
+----------------------------------------
+I created a new class CosinePearsonHybrid that averages the cosine similarity with pearson.
+
+I also tried some weighted averages and a section of  my results are below.
+
+...
+RMSE: 0.9862317429779974  user Cosine w: 2  user Pearson w:8 item Cosine w:2  item Pearson w:8
+RMSE: 0.9848458321532898  user Cosine w: 2  user Pearson w:8 item Cosine w:3  item Pearson w:7
+RMSE: 0.9838114250082263  user Cosine w: 2  user Pearson w:8 item Cosine w:4  item Pearson w:6
+RMSE: 0.9832487804280765  user Cosine w: 2  user Pearson w:8 item Cosine w:5  item Pearson w:5
+RMSE: 0.9831332928989266  user Cosine w: 2  user Pearson w:8 item Cosine w:6  item Pearson w:4
+RMSE: 0.98343696653626    user Cosine w: 2  user Pearson w:8 item Cosine w:7  item Pearson w:3
+> RMSE: 0.9829833320917658  user Cosine w: 2  user Pearson w:8 item Cosine w:8  item Pearson w:2
+RMSE: 0.9835743123981594  user Cosine w: 2  user Pearson w:8 item Cosine w:9  item Pearson w:1
+RMSE: 0.9885548189401521  user Cosine w: 3  user Pearson w:7 item Cosine w:1  item Pearson w:9
+RMSE: 0.9859485398008404  user Cosine w: 3  user Pearson w:7 item Cosine w:2  item Pearson w:8
+RMSE: 0.9846814210724572  user Cosine w: 3  user Pearson w:7 item Cosine w:3  item Pearson w:7
+...
+
+The best combination of weighted averages was  
+
+User Based CF -  Cosine Weight :  2     Pearson Weight:  8
+Item Base CF -   Cosine Weight :  8     Pearson Weight:  2
+
+RMSE: 0.9829833320917658
+
+
+v0.16 - Cosine and Pearson combinations for item and user based CF
+----------------------------------------
+
+It seems Pearsons with user and Cosine for item based appears to deliver better results.
+
+Item Based         User Based          RMSE
+Cosine             Cosine              0.9848579095001863
+Pearson 		   Pearson 			   0.9921154630905026
+Cosine			   Pearson			   0.9832863160733764
+Pearson			   Cosine			   0.9917065477171547	
+
+RMSE: 0.9832863160733767
+coverage: 99.77912755383765%
+
 v0.15 - Significance Weighting with Pearson Similarity 
 ----------------------------------------
+https://github.com/derekorgan/cf/commit/eb438efa16753503fa70db4f2d448ab19631c387
 
 Tested Pearson to see if significance weighting would improve it.  After an extensive test of many variations 
 I found an improvement on pearson with no significance weighting but not better than the current Cosine numbers
@@ -23,7 +67,7 @@ RMSE: 0.9921258089791603     User Significance:90    Item Significance: 60
 RMSE: 0.9921178026898955     User Significance:90    Item Significance: 65
 RMSE: 0.9921154630905042     User Significance:90    Item Significance: 70
 RMSE: 0.9921154630905042     User Significance:90    Item Significance: 75
-> RMSE: 0.9921154630905026     User Significance:90    Item Signifcance: 80
+> RMSE: 0.9921154630905026     User Significance:90    Item Significance: 80
 RMSE: 0.9921154630905039     User Significance:90    Item Significance: 85
 RMSE: 0.9921154630905052     User Significance:90    Item Significance: 90
 RMSE: 0.992115463090504     User Significance:90    Item Significance: 95
