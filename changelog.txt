@@ -12,6 +12,25 @@ Note: This github repository is private until week 5 deadline has passed.
 -- WEEK 5
 -------------------------------------------------------------------------------------
 
+v0.18 - Z-score normalization
+----------------------------------------
+
+While mean-centering removes the offsets caused by the different perceptions of an average 
+rating, Z- score normalization also considers the spread in the individual rating scales.
+
+I added to the profile a new method to get the standard deviation. 
+
+I then updated the Resnick function in the user-user based prediction so the standard deviation
+is used in the calculation. 
+
+Note: As an reminder you can review my code changes on the github interface.  If you click on 
+commits link you can click on a specific commit to view the code changes made. 
+
+RMSE: 0.980464404868937
+coverage: 99.87115773973863%
+
+
+
 
 v0.17 - Hybrid Cosine and Pearson Similarity
 ----------------------------------------

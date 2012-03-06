@@ -35,6 +35,7 @@ public class Resnick implements Predictor {
 		// Get the mean rating for the user we are trying to get a prediction for
 		Profile u = userProfileMap.get(userId);
 		double u_mean = u.getMeanValue();
+		double u_sd = u.getStandardDeviation();
 		
 		for(int i = 0; i < neighbours.size(); i++) // iterate over each neighbour
 		{
@@ -45,20 +46,24 @@ public class Resnick implements Predictor {
 				System.exit(1);
 			}
 			double n_mean = userProfileMap.get(neighbours.get(i)).getMeanValue(); // get the mean value of this neighbour
+			double n_sd =   userProfileMap.get(neighbours.get(i)).getStandardDeviation(); 
+			
+			if(n_sd == 0) // want to avoid division by zero 
+				n_sd = 0.0001;
+			
 			double n_diff = n_rating - n_mean;
 
 			double sim = simMap.getSimilarity(userId,neighbours.get(i));
 			
-			// added inverse user frequency --- wrong calculation.. should be on each co rated item not the item in to be predicted.. 
-			//double inverse = Math.log(userProfileMap.size()/itemProfileMap.get(itemId).getSize());
-			//sim = sim * inverse;
-			
-			above += n_diff * sim;
+			above += n_diff * sim / n_sd;
 			below += Math.abs(sim); 
+			
 		}
 		
-		if(neighbours.size() > 7)
-			return new Double(u_mean + (above / below));
+		if(neighbours.size() > 7) {
+			//System.out.println(u_mean + " + ("+u_sd+" * ("+ above + "/"+ below +"))");
+			return new Double(u_mean + (u_sd * (above / below)));
+		}
 		else
 			return null;
 	}

@@ -78,6 +78,22 @@ public class Profile
 	}
 
 	/**
+	 * @returns the sd value over all values in the profile
+	 */
+	public double getStandardDeviation()
+	{
+		double total = 0;
+		double mean = getMeanValue();
+
+		for(Double r: dataMap.values())
+			total += Math.pow(r.doubleValue() - mean, 2);
+
+		return getSize() > 0 ? Math.sqrt(total / getSize()) : 0;
+	}
+
+	
+	
+	/**
 	 * @returns the norm of all values in the profile
 	 */
 	public double getNorm()
