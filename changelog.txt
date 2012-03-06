@@ -14,6 +14,7 @@ Note: This github repository is private until week 5 deadline has passed.
 
 v0.18 - Z-score normalization
 ----------------------------------------
+https://github.com/derekorgan/cf/commit/14c74b2d30fbe4e4b57d2b1d02973dab3f9ca7ae
 
 While mean-centering removes the offsets caused by the different perceptions of an average 
 rating, Z- score normalization also considers the spread in the individual rating scales.
@@ -30,10 +31,10 @@ RMSE: 0.980464404868937
 coverage: 99.87115773973863%
 
 
-
-
 v0.17 - Hybrid Cosine and Pearson Similarity
 ----------------------------------------
+https://github.com/derekorgan/cf/commit/6719195aff1434ecbcf81703bcd2642fae6eccbe
+
 I created a new class CosinePearsonHybrid that averages the cosine similarity with pearson.
 
 I also tried some weighted averages and a section of  my results are below.

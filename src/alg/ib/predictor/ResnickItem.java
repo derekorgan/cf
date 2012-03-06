@@ -46,7 +46,7 @@ public class ResnickItem implements PredictorItem {
 			}
 			double n_mean = itemProfileMap.get(neighbours.get(j)).getMeanValue(); // get the mean value of this neighbour
 			double n_diff = n_rating - n_mean;
-
+			
 			double sim = simMap.getSimilarity(itemId,neighbours.get(j));
 			
 			above += n_diff * sim;

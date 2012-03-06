@@ -27,7 +27,7 @@ public class ExecuteHybrid
 		// set the paths and filenames of the item file, train file and test file ...
 		String itemFile = "FRT dataset" + File.separator + "r.item";
 		String trainFile = "FRT dataset" + File.separator + "r.train";
-		String testFile = "FRT dataset" + File.separator + "r.probe";
+		String testFile = "FRT dataset" + File.separator + "r.test";
 		DatasetReader reader = new DatasetReader(itemFile, trainFile, testFile);
 		
 		//for (int i=1; i<n; i++){
@@ -35,19 +35,19 @@ public class ExecuteHybrid
 						
 		// configure the user-based CF algorithm - set the predictor, neighbourhood and similarity metric ...
 		Predictor userPredictor = new Resnick();
-		Neighbourhood userNeighbourhood = new NearestNeighbourhood(53);
+		Neighbourhood userNeighbourhood = new NearestNeighbourhood(25);
 		SimilarityMetric userMetric = new CosinePearsonHybrid(90, 2, 8);
 		//SimilarityMetric userMetric = new Cosine(1);
 		
 		// configure the item-based CF alogrithm - set the predictor, neighbourhood and similarity metric ...
 		PredictorItem itemPredictor = new ResnickItem();
-		NeighbourhoodItem itemNeighbourhood = new NearestNeighbourhoodItem(22);
+		NeighbourhoodItem itemNeighbourhood = new NearestNeighbourhoodItem(14);
 		//SimilarityMetric itemMetric = new Pearson(80); // 80 is the max value for significance weighting	
 		SimilarityMetric itemMetric = new CosinePearsonHybrid(80, 8, 2);
 		
 		//Hybrid Weights for average of user and item based algorithm
-		int userWeight = 3;
-		int itemWeight = 7;
+		int userWeight = 4;
+		int itemWeight = 6;
 		
 		// set the path and filename of the output file ...
 		String outputFile = "results" + File.separator + "predictions.txt";
