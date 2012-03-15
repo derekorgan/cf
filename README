@@ -1,8 +1,7 @@
 
-
 Netflix type recommender system competition project on Flixer data from 2005
 
-This is basically an experimentation of on how you can improve recommendations predictions for movies and users. 
+This is basically an experimentation on how to improve recommendation predictions for movies and users. 
 
 I tried a number of more basic techniques
 
@@ -10,4 +9,5 @@ I incrementally improve on the prediction over time and at this moment have a hy
 system.  The primary similarity algorightm is a mixture of Cosine and Pearson and the prediction algorightm is Resnick we a small
 enhancement on user based to include standard deviation. 
 
-This might be useful for other exploring collborative filtering.
+This might be useful for others exploring collborative filtering.
+
